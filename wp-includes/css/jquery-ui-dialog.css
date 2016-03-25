@@ -280,7 +280,7 @@
 
 .ui-dialog-titlebar {
 	background: #fcfcfc;
-	border-bottom: 1px solid #dfdfdf;
+	border-bottom: 1px solid #ddd;
 	height: 36px;
 	font-size: 18px;
 	font-weight: 600;
@@ -306,7 +306,7 @@
 }
 
 .ui-dialog-titlebar-close:before {
-	font: normal 20px/1 'dashicons';
+	font: normal 20px/1 dashicons;
 	vertical-align: top;
 	speak: none;
 	-webkit-font-smoothing: antialiased;
@@ -332,7 +332,7 @@
 
 .ui-dialog-buttonpane {
 	background: #fcfcfc;
-	border-top: 1px solid #dfdfdf;
+	border-top: 1px solid #ddd;
 	padding: 16px;
 }
 

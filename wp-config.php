@@ -23,10 +23,6 @@ elseif  ((strpos(getenv('WP_ENV'),'stage') !== false) ||  (strpos(getenv('WP_ENV
 } 
 
 
-
-
-
-
 $path = dirname(__FILE__) . '/';
 if (file_exists($path . $config_file)) {
     // include the config file if it exists, otherwise WP is going to fail
