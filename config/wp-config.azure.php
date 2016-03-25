@@ -2,16 +2,31 @@
 // MySQL settings
 /** The name of the database for WordPress */ 
  
-define('DB_NAME', getenv ('DB_NAME'));
- 
+$connectstr_dbhost = '';
+$connectstr_dbname = '';
+$connectstr_dbusername = '';
+$connectstr_dbpassword = '';
+
+foreach ($_SERVER as $key => $value) {
+    if (strpos($key, "MYSQLCONNSTR_defaultConnection") !== 0) {
+        continue;
+    }
+    
+    $connectstr_dbhost = preg_replace("/^.*Data Source=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbname = preg_replace("/^.*Database=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbusername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
+    $connectstr_dbpassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
+}
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', $connectstr_dbname);
 /** MySQL database username */
-define('DB_USER', getenv ('DB_USER'));
- 
+define('DB_USER', $connectstr_dbusername);
 /** MySQL database password */
-define('DB_PASSWORD', getenv ('DB_PASSWORD'));
- 
+define('DB_PASSWORD', $connectstr_dbpassword);
 /** MySQL hostname */
-define('DB_HOST', getenv ('DB_HOST'));
+define('DB_HOST', $connectstr_dbhost);
  
 /**
  * For developers: WordPress debugging mode.
@@ -24,20 +39,20 @@ define('DB_HOST', getenv ('DB_HOST'));
  * with WP_DEBUG_LOG so that errors are not displayed on the page */
 
 
-define('WP_DEBUG', getenv ('WP_DEBUG'));
-define('WP_DEBUG_LOG', getenv ('TURN_ON_DEBUG_LOG'));
+define('WP_DEBUG', false);
+define('WP_DEBUG_LOG', false);
 define('WP_DEBUG_DISPLAY',false);
 
 //Security key settings
 /** If you need to generate the string for security keys mentioned above, you can go the automatic generator to create new keys/values: https://api.wordpress.org/secret-key/1.1/salt **/  
-define('AUTH_KEY',         'Lq&7vYFO:5Zv-:E(yvwqstc*k%tQz%7o_Pwrm-mGZmroLj+Oywoe#R-ZB5 S W7Z');
-define('SECURE_AUTH_KEY',  '(l@3DI6^8m}4s73~ry/r,|G|10hRJP?(UVky@w.-m=}-^f*YGT wy.Nut:0?WV*W');
-define('LOGGED_IN_KEY',    '.*=kJ)[F[NE;Ig JdJit]CwIVty8^!G6y3>x2!ldL7cg?Y!yHg^#?YJU^miPTV@r');
-define('NONCE_KEY',        '<{Y6*WQ)|I&UDbF)07fg}FqNFL2^lRD 9=+--7am2`vB7/+p$5.R:KGIS0Lx*}2e');
-define('AUTH_SALT',        'vCZnubCdyWd7fV07n,Vy3K[=)3+zG9(WE>etg;x7maFUS`Mow;Yeu0Uje[c{8;bE');
-define('SECURE_AUTH_SALT', 'x,!KN{,y)+}r|KY>R!28c4|>a^yo-Mq<~$(%JWv{j{cAIA,yl23T4My@?(Uu]sms');
-define('LOGGED_IN_SALT',   'B*+}B-Kw( jBix+W7JHu}Nmm+xe[CGf=RrtM ]K;/2S!5)DY_h8&CK}Qvr?$T:l]');
-define('NONCE_SALT',       '0]uFbbkZ{&t|mozg{kDiFO6]KYpU,laVUSXkAH/*hfXtqca,hCK-s++eJ280N)!F');
+define('AUTH_KEY',         getenv('authentication Key'));
+define('SECURE_AUTH_KEY',  getenv('secure Authentication Key'));
+define('LOGGED_IN_KEY',    getenv('logged In Key'));
+define('NONCE_KEY',        getenv('nonce Key'));
+define('AUTH_SALT',        getenv('authentication Salt'));
+define('SECURE_AUTH_SALT', getenv('secure Authentication Salt'));
+define('LOGGED_IN_SALT',   getenv('logged In Salt'));
+define('NONCE_SALT',       getenv('nonce Salt'));
 
 /**
  * WordPress Database Table prefix.
